@@ -63,7 +63,8 @@ class _BottomNavigationPageState extends State<BottomNavigationPage>
             children: [
               TabBar(
                 isScrollable: true,
-                labelColor: Color.fromARGB(255, 85, 77, 181),
+                // labelColor: Color.fromARGB(255, 85, 77, 181),
+                labelColor: Color(0xFF3a5baa),
                 unselectedLabelColor: Color(0xFF424252),
                 controller: tabController,
                 tabs: [

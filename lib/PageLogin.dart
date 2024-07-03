@@ -88,19 +88,53 @@ class _PageLoginState extends State<PageLogin> {
         //   );
         // }
 
-        final user = responseData['user'];
+        // final user = responseData['user'];
+        // print('User data: ${user}');
 
-        SharedPreferences prefs = await SharedPreferences.getInstance();
-        prefs.setString('email', user['email']);
-        prefs.setString('name', user['name']);
-        prefs.setString('phone', user['phone']);
-        prefs.setString('status', user['status']);
-        prefs.setInt('id', user['id']);
+        // SharedPreferences prefs = await SharedPreferences.getInstance();
+        // prefs.setString('email', user['email']);
+        // prefs.setString('password', user['password']);
+        // prefs.setString('name', user['name']);
+        // prefs.setString('phone', user['phone']);
+        // prefs.setString('status', user['status']);
 
-        Navigator.pushReplacement(
-          context,
-          MaterialPageRoute(builder: (context) => BottomNavigationPage()),
-        );
+        // // Jika address dan picture null, simpan nilai default
+        // prefs.setString('address', user['address'] ?? '');
+        // prefs.setString('picture', user['picture'] ?? '');
+        // prefs.setString('picture', user['picture'] ?? '');
+        // prefs.setInt('id', user['id']);
+
+        // Navigator.pushReplacement(
+        //   context,
+        //   MaterialPageRoute(builder: (context) => BottomNavigationPage()),
+        // );
+        if (responseData['status'] == true) {
+          final user = responseData['user'];
+          print('User data: ${user}');
+
+          SharedPreferences prefs = await SharedPreferences.getInstance();
+          prefs.setString('email', user['email'] ?? '');
+          prefs.setString('password', user['password'] ?? '');
+          prefs.setString('name', user['name'] ?? '');
+          prefs.setString('phone', user['phone'] ?? '');
+          prefs.setString('status', user['status'] ?? '');
+          prefs.setString('address', user['address'] ?? '');
+          prefs.setString('picture', user['picture'] ?? '');
+
+          if (user['id'] != null) {
+            prefs.setInt(
+                'id_user', user['id']); // Simpan ID dengan key 'id_user'
+          } else {
+            throw Exception('User ID is missing');
+          }
+
+          Navigator.pushReplacement(
+            context,
+            MaterialPageRoute(builder: (context) => BottomNavigationPage()),
+          );
+        } else {
+          throw Exception('Login failed. ${responseData['message']}');
+        }
       } else if (response.statusCode == 401) {
         final Map<String, dynamic> errorResponse = json.decode(response.body);
         showDialog(
