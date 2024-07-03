@@ -1,19 +1,19 @@
 import 'package:flutter/material.dart';
 
-class PageRiwayat extends StatefulWidget {
-  const PageRiwayat({super.key});
+class PageHistory extends StatefulWidget {
+  const PageHistory({super.key});
 
   @override
-  State<PageRiwayat> createState() => _PageRiwayatState();
+  State<PageHistory> createState() => _PageHistoryState();
 }
 
-class _PageRiwayatState extends State<PageRiwayat> {
+class _PageHistoryState extends State<PageHistory> {
   @override
   Widget build(BuildContext context) {
     return Container(
       child: Center(
         child: Text(
-          'page riwayat',
+          'page riwayat pesanan',
           style: TextStyle(fontSize: 24.0),
         ),
       ),

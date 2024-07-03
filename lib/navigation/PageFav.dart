@@ -1,19 +1,19 @@
 import 'package:flutter/material.dart';
 
-class PageGaleri extends StatefulWidget {
-  const PageGaleri({super.key});
+class PageFav extends StatefulWidget {
+  const PageFav({super.key});
 
   @override
-  State<PageGaleri> createState() => _PageGaleriState();
+  State<PageFav> createState() => _PageFavState();
 }
 
-class _PageGaleriState extends State<PageGaleri> {
+class _PageFavState extends State<PageFav> {
   @override
   Widget build(BuildContext context) {
     return Container(
       child: Center(
         child: Text(
-          'page galeri',
+          'page favorite',
           style: TextStyle(fontSize: 24.0),
         ),
       ),

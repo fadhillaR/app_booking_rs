@@ -1,6 +1,6 @@
 import 'package:app_booking_rs/navigation/HomePage.dart';
-import 'package:app_booking_rs/navigation/PageGaleri.dart';
-import 'package:app_booking_rs/navigation/PageRiwayat.dart';
+import 'package:app_booking_rs/navigation/PageHistory.dart';
+import 'package:app_booking_rs/navigation/PageFav.dart';
 import 'package:app_booking_rs/navigation/PageSetting.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -37,10 +37,10 @@ class _BottomNavigationPageState extends State<BottomNavigationPage>
   Widget build(BuildContext context) {
     return Scaffold(
       body: TabBarView(controller: tabController, children: [
-        // PageMulai(pageController: pageController),
-        PageMulai(),
-        PageRiwayat(),
-        PageGaleri(),
+        PageMulai(pageController: pageController),
+        // PageMulai(),
+        PageHistory(),
+        PageFav(),
         PageSetting()
       ]),
       bottomNavigationBar: BottomAppBar(
@@ -79,7 +79,7 @@ class _BottomNavigationPageState extends State<BottomNavigationPage>
                     icon: Padding(
                       padding: EdgeInsets.symmetric(
                           horizontal: 16.0),
-                      // child: Icon(Icons.local_shipping),
+                      // child: Icon(Icons.favorite),
                       child: Icon(Icons.history),
                     ),
                   ),
@@ -87,8 +87,8 @@ class _BottomNavigationPageState extends State<BottomNavigationPage>
                     icon: Padding(
                       padding: EdgeInsets.symmetric(
                           horizontal: 16.0),
-                      // child: Icon(Icons.favorite),
-                      child: Icon(Icons.photo_album),
+                      // child: Icon(Icons.local_shipping),
+                      child: Icon(Icons.favorite),
                     ),
                   ),
                   Tab(

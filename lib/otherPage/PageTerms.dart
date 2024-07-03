@@ -35,7 +35,7 @@ class PageTerms extends StatelessWidget {
               style: TextStyle(
                 fontSize: 24,
                 fontWeight: FontWeight.bold,
-                color: Color(0xFF3a5baa),
+                color: Colors.blueAccent,
               ),
             ),
             SizedBox(height: 12),
@@ -127,7 +127,7 @@ class PageTerms extends StatelessWidget {
             style: TextStyle(
               fontSize: 18,
               fontWeight: FontWeight.bold,
-              color: Color(0xFF3a5baa),
+              color: Colors.blueAccent,
             ),
           ),
           SizedBox(height: 8),

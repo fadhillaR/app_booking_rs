@@ -1,4 +1,6 @@
 import 'package:app_booking_rs/PageProfil.dart';
+import 'package:app_booking_rs/otherPage/PageAbout.dart';
+import 'package:app_booking_rs/otherPage/PageContact.dart';
 import 'package:app_booking_rs/otherPage/PageFAQ.dart';
 import 'package:app_booking_rs/otherPage/PageTerms.dart';
 import 'package:flutter/cupertino.dart';
@@ -71,10 +73,30 @@ class PageSetting extends StatelessWidget {
                       );
                     },
                   ),
-                  const _CustomListTile(
-                      title: "About Us", icon: CupertinoIcons.question),
-                  const _CustomListTile(
-                      title: "Contact Us", icon: CupertinoIcons.phone),
+                  _CustomListTile(
+                    title: "About Us",
+                    icon: CupertinoIcons.question,
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => PageAbout(),
+                        ),
+                      );
+                    },
+                  ),
+                  _CustomListTile(
+                    title: "Contact Us",
+                    icon: CupertinoIcons.phone,
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => PageContact(),
+                        ),
+                      );
+                    },
+                  ),
                   const _CustomListTile(
                       title: "Help", icon: CupertinoIcons.info_circle),
                 ],
@@ -106,8 +128,8 @@ class PageSetting extends StatelessWidget {
                       // );
                     },
                   ),
-                  const _CustomListTile(
-                      title: "Security", icon: CupertinoIcons.lock_shield),
+                  // const _CustomListTile(
+                  //     title: "Security", icon: CupertinoIcons.lock_shield),
                 ],
               ),
               Padding(
