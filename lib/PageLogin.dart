@@ -464,13 +464,17 @@ class _PageLoginState extends State<PageLogin> {
           padding: const EdgeInsets.all(30.0),
           child: Column(
             children: [
-              const SizedBox(height: 150),
-              Text(
-                "Welcome back",
-                style: Theme.of(context).textTheme.headlineLarge?.copyWith(
-                      color: Colors.black,
-                      fontWeight: FontWeight.bold,
-                    ),
+              const SizedBox(height: 100),
+              // Text(
+              //   "Welcome back",
+              //   style: Theme.of(context).textTheme.headlineLarge?.copyWith(
+              //         color: Colors.black,
+              //         fontWeight: FontWeight.bold,
+              //       ),
+              // ),
+              Image.asset(
+                'assets/logo1.png',
+                height: 120, 
               ),
               const SizedBox(height: 10),
               Text(

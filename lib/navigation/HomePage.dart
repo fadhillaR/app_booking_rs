@@ -60,7 +60,6 @@ class _PageMulaiState extends State<PageMulai> with TickerProviderStateMixin {
     setState(() {
       userName = prefs.getString('name') ?? '';
     });
-    
 
     // // Show welcome dialog if userName is not empty
     // if (userName != null && userName!.isNotEmpty) {
@@ -114,6 +113,7 @@ class _PageMulaiState extends State<PageMulai> with TickerProviderStateMixin {
         // toolbarHeight: 20,
         // backgroundColor: Color(0xFFE6E6E6),
         backgroundColor: Colors.white,
+        // backgroundColor: Color(0xFFf5ffff),
         title: Text(
           'Rumah Singgah',
           style: TextStyle(
@@ -159,7 +159,7 @@ class _PageMulaiState extends State<PageMulai> with TickerProviderStateMixin {
       ),
       body: SingleChildScrollView(
         child: Container(
-          height: 800,
+          height: 600,
           width: double.infinity,
           decoration: BoxDecoration(
             gradient: LinearGradient(
@@ -201,96 +201,142 @@ class _PageMulaiState extends State<PageMulai> with TickerProviderStateMixin {
                     },
                     physics: AlwaysScrollableScrollPhysics(),
                     children: [
-                      Image.network(
-                        'https://izi.or.id/wp-content/uploads/2022/05/Rumah-Singgah-Pasien-1024x682.jpeg',
-                        fit: BoxFit.cover,
+                      ClipRRect(
+                        borderRadius: BorderRadius.circular(5),
+                        child: Container(
+                          decoration: BoxDecoration(
+                            boxShadow: [
+                              BoxShadow(
+                                color: Colors.black26,
+                                blurRadius: 10,
+                                offset: Offset(0, 4),
+                              ),
+                            ],
+                          ),
+                          child: Image.network(
+                            'https://izi.or.id/wp-content/uploads/2022/05/Rumah-Singgah-Pasien-1024x682.jpeg',
+                            fit: BoxFit.cover,
+                          ),
+                        ),
                       ),
-                      Image.network(
-                        'https://static.promediateknologi.id/crop/0x0:0x0/750x500/webp/photo/p1/127/2023/11/12/FotoJet135-680111003.jpg',
-                        fit: BoxFit.cover,
+                      ClipRRect(
+                        borderRadius: BorderRadius.circular(5),
+                        child: Container(
+                          decoration: BoxDecoration(
+                            boxShadow: [
+                              BoxShadow(
+                                color: Colors.black26,
+                                blurRadius: 10,
+                                offset: Offset(0, 4),
+                              ),
+                            ],
+                          ),
+                          child: Image.network(
+                            'https://static.promediateknologi.id/crop/0x0:0x0/750x500/webp/photo/p1/127/2023/11/12/FotoJet135-680111003.jpg',
+                            fit: BoxFit.cover,
+                          ),
+                        ),
                       ),
-                      Image.network(
-                        'https://asset-2.tstatic.net/aceh/foto/bank/images/rumah-singgah-rumah-sakit-umum-daerah-dr-zainoel-abidin-2019.jpg',
-                        fit: BoxFit.cover,
+                      ClipRRect(
+                        borderRadius: BorderRadius.circular(5),
+                        child: Container(
+                          decoration: BoxDecoration(
+                            boxShadow: [
+                              BoxShadow(
+                                color: Colors.black26,
+                                blurRadius: 10,
+                                offset: Offset(0, 4),
+                              ),
+                            ],
+                          ),
+                          child: Image.network(
+                            'https://asset-2.tstatic.net/aceh/foto/bank/images/rumah-singgah-rumah-sakit-umum-daerah-dr-zainoel-abidin-2019.jpg',
+                            fit: BoxFit.cover,
+                          ),
+                        ),
                       ),
                     ],
                   ),
                 ),
 
                 //button grid
-                Container(
-                  color: Colors.white,
-                  child: Padding(
-                    // padding: const EdgeInsets.all(8.0),
-                    padding: const EdgeInsets.fromLTRB(0, 0, 0, 0),
-                    child: Column(
-                      children: [
-                        SizedBox(
-                          height: 15,
-                        ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                          children: [
-                            menuContainer(
-                              icon: Icons.home_filled,
-                              label: 'Daftar\nRumah Singgah',
-                              onTap: () {
-                                Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (context) => PageListRS()));
-                              },
-                            ),
-                            SizedBox(width: 20),
-                            menuContainer(
-                              icon: Icons.shopping_cart,
-                              label: 'Booking\n Rumah Singgah',
-                              onTap: () {
-                                // Navigasi ke halaman riwayat pemesanan
-                              },
-                            ),
-                            SizedBox(width: 20),
-                            menuContainer(
-                              icon: Icons.credit_card,
-                              label: 'Donasi',
-                              onTap: () {
-                                // Navigasi ke halaman donasi
-                              },
-                            ),
-                          ],
-                        ),
-                        SizedBox(height: 10),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                          children: [
-                            // SizedBox(width: 0.12),
-                            // Text('  ', style: TextStyle(color: Colors.white),),
-                            menuContainer(
-                              icon: Icons.money,
-                              label: 'Program Donasi\nRumah Singgah',
-                              onTap: () {
-                                // Navigasi ke halaman daftar rumah singgah
-                              },
-                            ),
-                            SizedBox(width: 20),
-                            menuContainer(
-                              icon: Icons.photo_album,
-                              label: 'Gallery',
-                              onTap: () {
-                                // Navigasi ke halaman riwayat pemesanan
-                              },
-                            ),
-                            SizedBox(width: 20),
-                            menuContainer(
-                              icon: Icons.inventory_rounded,
-                              label: 'Testimoni',
-                              onTap: () {
-                                // Navigasi ke halaman donasi
-                              },
-                            ),
-                          ],
-                        ),
-                      ],
+                Padding(
+                  padding: const EdgeInsets.fromLTRB(5, 5, 5, 0),
+                  child: Container(
+                    color: Colors.white,
+                    // color: const Color(0xFFf5ffff),
+                    child: Padding(
+                      // padding: const EdgeInsets.all(8.0),
+                      padding: const EdgeInsets.fromLTRB(0, 0, 0, 0),
+                      child: Column(
+                        children: [
+                          SizedBox(
+                            height: 15,
+                          ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                            children: [
+                              menuContainer(
+                                icon: Icons.home_filled,
+                                label: 'Daftar\nRumah Singgah',
+                                onTap: () {
+                                  Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) => PageListRS()));
+                                },
+                              ),
+                              SizedBox(width: 20),
+                              menuContainer(
+                                icon: Icons.shopping_cart,
+                                label: 'Booking\n Rumah Singgah',
+                                onTap: () {
+                                  // Navigasi ke halaman riwayat pemesanan
+                                },
+                              ),
+                              SizedBox(width: 20),
+                              menuContainer(
+                                icon: Icons.credit_card,
+                                label: 'Donasi',
+                                onTap: () {
+                                  // Navigasi ke halaman donasi
+                                },
+                              ),
+                            ],
+                          ),
+                          SizedBox(height: 10),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                            children: [
+                              // SizedBox(width: 0.12),
+                              // Text('  ', style: TextStyle(color: Colors.white),),
+                              menuContainer(
+                                icon: Icons.money,
+                                label: 'Program Donasi\nRumah Singgah',
+                                onTap: () {
+                                  // Navigasi ke halaman daftar rumah singgah
+                                },
+                              ),
+                              SizedBox(width: 20),
+                              menuContainer(
+                                icon: Icons.photo_album,
+                                label: 'Gallery',
+                                onTap: () {
+                                  // Navigasi ke halaman riwayat pemesanan
+                                },
+                              ),
+                              SizedBox(width: 20),
+                              menuContainer(
+                                icon: Icons.inventory_rounded,
+                                label: 'Testimoni',
+                                onTap: () {
+                                  // Navigasi ke halaman donasi
+                                },
+                              ),
+                            ],
+                          ),
+                        ],
+                      ),
                     ),
                   ),
                 )
@@ -309,6 +355,7 @@ class _PageMulaiState extends State<PageMulai> with TickerProviderStateMixin {
     return Container(
       padding: EdgeInsets.all(5),
       decoration: BoxDecoration(
+        // color: Color(0xFFf5ffff),
         color: Colors.white,
         borderRadius: BorderRadius.circular(5),
       ),

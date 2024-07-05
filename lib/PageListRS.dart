@@ -88,6 +88,15 @@ class _PageListRSState extends State<PageListRS> {
           .toList();
     });
   }
+  
+
+  String truncateDescription(String description, int wordLimit) {
+    List<String> words = description.split(' ');
+    if (words.length <= wordLimit) {
+      return description;
+    }
+    return words.sublist(0, wordLimit).join(' ') + '...';
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -184,7 +193,7 @@ class _PageListRSState extends State<PageListRS> {
                                 padding: const EdgeInsets.only(
                                     left: 8.0, right: 8.0, top: 8.0),
                                 child: Text(
-                                  capitalize(homestay.name),
+                                  truncateDescription(capitalize(homestay.name),4),
                                   style: TextStyle(
                                     fontSize: 15,
                                     fontWeight: FontWeight.bold,
@@ -195,7 +204,7 @@ class _PageListRSState extends State<PageListRS> {
                                 padding: const EdgeInsets.only(
                                     left: 8.0, right: 8.0, top: 1.0, bottom: 8.0),
                                 child: Text(
-                                  capitalize(homestay.address),
+                                  truncateDescription(capitalize(homestay.address), 12),
                                   style: TextStyle(
                                     fontSize: 13,
                                   ),

@@ -49,6 +49,7 @@ class _BottomNavigationPageState extends State<BottomNavigationPage>
             borderRadius: BorderRadius.vertical(
                 top: Radius.circular(5), bottom: Radius.circular(5)),
             color: Colors.white,
+            // color: Color(0xFFf5ffff),
             boxShadow: [
               BoxShadow(
                 color: Colors.grey.withOpacity(0.5),
@@ -64,8 +65,9 @@ class _BottomNavigationPageState extends State<BottomNavigationPage>
               TabBar(
                 isScrollable: true,
                 // labelColor: Color.fromARGB(255, 85, 77, 181),
-                labelColor: Color(0xFF3a5baa),
-                unselectedLabelColor: Color(0xFF424252),
+                labelColor: Colors.blueAccent,
+                // unselectedLabelColor: Color(0xFF424252),
+                unselectedLabelColor: Color(0xFF3a5baa),
                 controller: tabController,
                 tabs: [
                   Tab(
