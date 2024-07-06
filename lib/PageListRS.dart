@@ -1,4 +1,5 @@
 import 'package:app_booking_rs/PageDetailRS.dart';
+import 'package:app_booking_rs/PageHospital.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:http/http.dart' as http;
@@ -88,7 +89,6 @@ class _PageListRSState extends State<PageListRS> {
           .toList();
     });
   }
-  
 
   String truncateDescription(String description, int wordLimit) {
     List<String> words = description.split(' ');
@@ -110,6 +110,23 @@ class _PageListRSState extends State<PageListRS> {
             fontWeight: FontWeight.bold,
           ),
         ),
+        actions: [
+          IconButton(
+            icon: Icon(
+              Icons.map,
+              color: Colors.black,
+              size: 30,
+            ),
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => PageHospital(),
+                ),
+              );
+            },
+          ),
+        ],
         backgroundColor: Colors.white,
         automaticallyImplyLeading: false,
         centerTitle: true,
@@ -172,7 +189,7 @@ class _PageListRSState extends State<PageListRS> {
                           margin: EdgeInsets.all(0),
                           color: Colors.white,
                           shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(10),
+                            borderRadius: BorderRadius.circular(3),
                           ),
                           elevation: 4,
                           child: Column(
@@ -193,7 +210,8 @@ class _PageListRSState extends State<PageListRS> {
                                 padding: const EdgeInsets.only(
                                     left: 8.0, right: 8.0, top: 8.0),
                                 child: Text(
-                                  truncateDescription(capitalize(homestay.name),4),
+                                  truncateDescription(
+                                      capitalize(homestay.name), 4),
                                   style: TextStyle(
                                     fontSize: 15,
                                     fontWeight: FontWeight.bold,
@@ -202,9 +220,13 @@ class _PageListRSState extends State<PageListRS> {
                               ),
                               Padding(
                                 padding: const EdgeInsets.only(
-                                    left: 8.0, right: 8.0, top: 1.0, bottom: 8.0),
+                                    left: 8.0,
+                                    right: 8.0,
+                                    top: 1.0,
+                                    bottom: 8.0),
                                 child: Text(
-                                  truncateDescription(capitalize(homestay.address), 12),
+                                  truncateDescription(
+                                      capitalize(homestay.address), 12),
                                   style: TextStyle(
                                     fontSize: 13,
                                   ),

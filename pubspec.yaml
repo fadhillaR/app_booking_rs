@@ -40,6 +40,9 @@ dependencies:
   shared_preferences: ^2.2.2
   file_picker: ^6.1.0
   url_launcher: ^6.1.5
+  flutter_spinkit: ^5.2.1
+  intl: ^0.17.0
+  cached_network_image: ^3.2.3
 
 dev_dependencies:
   flutter_test:
@@ -77,6 +80,11 @@ flutter:
     - assets/b1.png
     - assets/b2.png
     - assets/b3.png
+    - assets/bri.png
+    - assets/bni.png
+    - assets/mandiri.png
+    - assets/bsi.png
+    - assets/nagari.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware

@@ -182,276 +182,390 @@ class _PageLoginState extends State<PageLogin> {
     }
   }
 
-  // void _forgotPassword() {
-  //   TextEditingController txtEmail = TextEditingController();
-  //   TextEditingController txtNewPassword = TextEditingController();
-  //   TextEditingController txtConfirmPassword = TextEditingController();
-  //   GlobalKey<FormState> _formKey = GlobalKey<FormState>();
-  //   bool _isEmailValid = false;
-  //   bool _isLoading = false;
-  //   bool _obscureText = true;
-  //   bool _obscureText2 = true;
+  void _forgotPassword() {
+    // Define TextEditingControllers and other state variables
+    TextEditingController txtEmail = TextEditingController();
+    TextEditingController txtNewPassword = TextEditingController();
+    TextEditingController txtConfirmPassword = TextEditingController();
+    GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+    bool _isEmailValid = false;
+    bool _isLoading = false;
+    bool _obscureText = true;
+    bool _obscureText2 = true;
+    int? userId; // Add a variable for user ID
 
-  //   showDialog(
-  //     context: context,
-  //     builder: (context) {
-  //       return StatefulBuilder(
-  //         builder: (context, setState) {
-  //           return AlertDialog(
-  //             title: Text(_isEmailValid ? 'Reset Password' : 'Forgot Password'),
-  //             content: Form(
-  //               key: _formKey,
-  //               child: Column(
-  //                 mainAxisSize: MainAxisSize.min,
-  //                 children: <Widget>[
-  //                   if (!_isEmailValid) ...[
-  //                     Text("Enter your email to reset your password:"),
-  //                     TextFormField(
-  //                       controller: txtEmail,
-  //                       decoration: InputDecoration(
-  //                         hintText: 'Enter email address',
-  //                       ),
-  //                       validator: (value) {
-  //                         if (value!.isEmpty) {
-  //                           return 'Email cannot be empty.';
-  //                         } else if (!RegExp(
-  //                                 r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$')
-  //                             .hasMatch(value)) {
-  //                           return 'Enter a valid email address.';
-  //                         }
-  //                         return null;
-  //                       },
-  //                     ),
-  //                   ] else ...[
-  //                     Text("Enter your new password:"),
-  //                     TextFormField(
-  //                       controller: txtNewPassword,
-  //                       obscureText: _obscureText,
-  //                       decoration: InputDecoration(
-  //                         hintText: 'Enter new password',
-  //                         suffixIcon: IconButton(
-  //                           icon: Icon(_obscureText
-  //                               ? Icons.visibility_off
-  //                               : Icons.visibility),
-  //                           onPressed: () {
-  //                             setState(() {
-  //                               _obscureText = !_obscureText;
-  //                             });
-  //                           },
-  //                         ),
-  //                       ),
-  //                       validator: (value) {
-  //                         if (value!.isEmpty) {
-  //                           return 'Password cannot be empty.';
-  //                         } else if (value.length < 8) {
-  //                           return 'Password must be at least 8 characters long.';
-  //                         }
-  //                         return null;
-  //                       },
-  //                     ),
-  //                     SizedBox(height: 20),
-  //                     TextFormField(
-  //                       controller: txtConfirmPassword,
-  //                       obscureText: _obscureText2,
-  //                       decoration: InputDecoration(
-  //                         hintText: 'Confirm new password',
-  //                         suffixIcon: IconButton(
-  //                           icon: Icon(_obscureText2
-  //                               ? Icons.visibility_off
-  //                               : Icons.visibility),
-  //                           onPressed: () {
-  //                             setState(() {
-  //                               _obscureText2 = !_obscureText2;
-  //                             });
-  //                           },
-  //                         ),
-  //                       ),
-  //                       validator: (value) {
-  //                         if (value != txtNewPassword.text) {
-  //                           return 'Passwords do not match.';
-  //                         }
-  //                         return null;
-  //                       },
-  //                     ),
-  //                   ],
-  //                 ],
-  //               ),
-  //             ),
-  //             actions: <Widget>[
-  //               if (!_isEmailValid) ...[
-  //                 TextButton(
-  //                   child: Text('Submit'),
-  //                   onPressed: () async {
-  //                     if (!_formKey.currentState!.validate()) {
-  //                       return;
-  //                     }
+    showDialog(
+      context: context,
+      builder: (context) {
+        return StatefulBuilder(
+          builder: (context, setState) {
+            return AlertDialog(
+              title: Row(
+                children: [
+                  Icon(
+                    _isEmailValid ? Icons.lock_reset : Icons.email_outlined,
+                    color: _isEmailValid ? Colors.green : Colors.blue,
+                  ),
+                  SizedBox(width: 10),
+                  Text(
+                    _isEmailValid ? 'Reset Password' : 'Forgot Password',
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      color: Colors.black,
+                    ),
+                  ),
+                ],
+              ),
+              content: Form(
+                key: _formKey,
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: <Widget>[
+                    if (!_isEmailValid) ...[
+                      Text(
+                        "Please enter your email address to reset your password:",
+                        style: TextStyle(color: Colors.black54),
+                      ),
+                      SizedBox(height: 10),
+                      TextFormField(
+                        controller: txtEmail,
+                        decoration: InputDecoration(
+                          hintText: 'Enter your email address',
+                          prefixIcon: Icon(Icons.email, color: Colors.blue),
+                          border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(10),
+                          ),
+                          filled: true,
+                          fillColor: Colors.blue[50],
+                        ),
+                        validator: (value) {
+                          if (value!.isEmpty) {
+                            return 'Email cannot be empty.';
+                          } else if (!RegExp(
+                                  r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$')
+                              .hasMatch(value)) {
+                            return 'Enter a valid email address.';
+                          }
+                          return null;
+                        },
+                      ),
+                    ] else ...[
+                      Text(
+                        "Enter your new password:",
+                        style: TextStyle(color: Colors.black54),
+                      ),
+                      SizedBox(height: 10),
+                      TextFormField(
+                        controller: txtNewPassword,
+                        obscureText: _obscureText,
+                        decoration: InputDecoration(
+                          hintText: 'Enter new password',
+                          prefixIcon: Icon(Icons.lock, color: Colors.blue),
+                          suffixIcon: IconButton(
+                            icon: Icon(
+                              _obscureText
+                                  ? Icons.visibility_off
+                                  : Icons.visibility,
+                              color: Colors.blue,
+                            ),
+                            onPressed: () {
+                              setState(() {
+                                _obscureText = !_obscureText;
+                              });
+                            },
+                          ),
+                          border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(10),
+                          ),
+                          filled: true,
+                          fillColor: Colors.blue[50],
+                        ),
+                        validator: (value) {
+                          if (value!.isEmpty) {
+                            return 'Password cannot be empty.';
+                          } else if (value.length < 8) {
+                            return 'Password must be at least 8 characters long.';
+                          }
+                          return null;
+                        },
+                      ),
+                      SizedBox(height: 10),
+                      TextFormField(
+                        controller: txtConfirmPassword,
+                        obscureText: _obscureText2,
+                        decoration: InputDecoration(
+                          hintText: 'Confirm new password',
+                          prefixIcon: Icon(Icons.lock, color: Colors.blue),
+                          suffixIcon: IconButton(
+                            icon: Icon(
+                              _obscureText2
+                                  ? Icons.visibility_off
+                                  : Icons.visibility,
+                              color: Colors.blue,
+                            ),
+                            onPressed: () {
+                              setState(() {
+                                _obscureText2 = !_obscureText2;
+                              });
+                            },
+                          ),
+                          border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(10),
+                          ),
+                          filled: true,
+                          fillColor: Colors.blue[50],
+                        ),
+                        validator: (value) {
+                          if (value != txtNewPassword.text) {
+                            return 'Passwords do not match.';
+                          }
+                          return null;
+                        },
+                      ),
+                    ],
+                  ],
+                ),
+              ),
+              actions: <Widget>[
+                if (!_isEmailValid) ...[
+                  TextButton(
+                    child: Text(
+                      'Submit',
+                      style: TextStyle(
+                        color: Colors.blue,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    onPressed: () async {
+                      if (!_formKey.currentState!.validate()) {
+                        return;
+                      }
 
-  //                     setState(() {
-  //                       _isLoading = true;
-  //                     });
+                      setState(() {
+                        _isLoading = true;
+                      });
 
-  //                     final email = txtEmail.text;
+                      final email = txtEmail.text;
 
-  //                     try {
-  //                       final response = await http.post(
-  //                         Uri.parse('http://127.0.0.1:8000/api/check-email'),
-  //                         body: {'email': email},
-  //                       );
+                      try {
+                        final response = await http.post(
+                          Uri.parse('http://127.0.0.1:8000/api/check-email'),
+                          body: {'email': email},
+                        );
 
-  //                       // Log the response body
-  //                       print('Response status: ${response.statusCode}');
-  //                       print('Response body: ${response.body}');
+                        final Map<String, dynamic> responseData =
+                            json.decode(response.body);
 
-  //                       final Map<String, dynamic> responseData =
-  //                           json.decode(response.body);
+                        if (response.statusCode == 200 &&
+                            responseData['user'] != null) {
+                          setState(() {
+                            _isEmailValid = true;
+                            userId = responseData['user']['id']; 
+                          });
+                        } else {
+                          showDialog(
+                            context: context,
+                            builder: (context) => AlertDialog(
+                              title: Text('Error'),
+                              content: Text(responseData['message'] ??
+                                  'Email not found.'),
+                              actions: [
+                                TextButton(
+                                  onPressed: () => Navigator.pop(context),
+                                  child: Text(
+                                    'OK',
+                                    style: TextStyle(
+                                      color: Colors.blue,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          );
+                        }
+                      } catch (error) {
+                        print('Error: $error');
 
-  //                       if (response.statusCode == 200 &&
-  //                           responseData['status'] == true) {
-  //                         setState(() {
-  //                           _isEmailValid = true;
-  //                         });
-  //                       } else {
-  //                         showDialog(
-  //                           context: context,
-  //                           builder: (context) => AlertDialog(
-  //                             title: Text('Error'),
-  //                             content: Text(responseData['message'] ??
-  //                                 'Email not found.'),
-  //                             actions: [
-  //                               TextButton(
-  //                                 onPressed: () => Navigator.pop(context),
-  //                                 child: Text('OK'),
-  //                               ),
-  //                             ],
-  //                           ),
-  //                         );
-  //                       }
-  //                     } catch (error) {
-  //                       print('Error: $error');
+                        showDialog(
+                          context: context,
+                          builder: (context) => AlertDialog(
+                            title: Text('Error'),
+                            content:
+                                Text('An error occurred while checking email.'),
+                            actions: [
+                              TextButton(
+                                onPressed: () => Navigator.pop(context),
+                                child: Text(
+                                  'OK',
+                                  style: TextStyle(
+                                    color: Colors.blue,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                        );
+                      } finally {
+                        setState(() {
+                          _isLoading = false;
+                        });
+                      }
+                    },
+                  ),
+                ] else ...[
+                  TextButton(
+                    child: Text(
+                      'Reset Password',
+                      style: TextStyle(
+                        color: Colors.blue,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    onPressed: () async {
+                      if (!_formKey.currentState!.validate()) {
+                        return;
+                      }
 
-  //                       showDialog(
-  //                         context: context,
-  //                         builder: (context) => AlertDialog(
-  //                           title: Text('Error'),
-  //                           content:
-  //                               Text('An error occurred while checking email.'),
-  //                           actions: [
-  //                             TextButton(
-  //                               onPressed: () => Navigator.pop(context),
-  //                               child: Text('OK'),
-  //                             ),
-  //                           ],
-  //                         ),
-  //                       );
-  //                     } finally {
-  //                       setState(() {
-  //                         _isLoading = false;
-  //                       });
-  //                     }
-  //                   },
-  //                 ),
-  //               ] else ...[
-  //                 TextButton(
-  //                   child: Text('Reset Password'),
-  //                   onPressed: () async {
-  //                     if (!_formKey.currentState!.validate()) {
-  //                       return;
-  //                     }
+                      setState(() {
+                        _isLoading = true;
+                      });
 
-  //                     setState(() {
-  //                       _isLoading = true;
-  //                     });
+                      try {
+                        final response = await http.post(
+                          Uri.parse(
+                              'http://127.0.0.1:8000/api/reset-password/$userId'),
+                          body: {
+                            'password': txtNewPassword.text,
+                            'password_confirmation': txtConfirmPassword.text,
+                          },
+                        );
 
-  //                     try {
-  //                       final response = await http.post(
-  //                         Uri.parse('http://127.0.0.1:8000/api/reset-password'),
-  //                         body: {
-  //                           'email': txtEmail.text,
-  //                           'password': txtNewPassword.text,
-  //                           'password_confirmation': txtConfirmPassword.text,
-  //                         },
-  //                       );
+                        final Map<String, dynamic> responseData =
+                            json.decode(response.body);
 
-  //                       // Log the response body
-  //                       print('Response status: ${response.statusCode}');
-  //                       print('Response body: ${response.body}');
+                        if (response.statusCode == 200) {
+                          showDialog(
+                            context: context,
+                            builder: (context) => AlertDialog(
+                              title: Text(
+                                'Success',
+                                style: TextStyle(
+                                  color: Colors.green,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                              content: Text(
+                                'Password has been reset successfully.',
+                                style: TextStyle(color: Colors.black54),
+                              ),
+                              actions: [
+                                TextButton(
+                                  onPressed: () {
+                                    Navigator.pop(context);
+                                    Navigator.pop(context);
+                                  },
+                                  child: Text(
+                                    'OK',
+                                    style: TextStyle(
+                                      color: Colors.blue,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          );
+                        } else {
+                          showDialog(
+                            context: context,
+                            builder: (context) => AlertDialog(
+                              title: Text(
+                                'Error',
+                                style: TextStyle(
+                                  color: Colors.red,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                              content: Text(
+                                responseData['message'] ??
+                                    'Failed to reset password.',
+                                style: TextStyle(color: Colors.black54),
+                              ),
+                              actions: [
+                                TextButton(
+                                  onPressed: () => Navigator.pop(context),
+                                  child: Text(
+                                    'OK',
+                                    style: TextStyle(
+                                      color: Colors.blue,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          );
+                        }
+                      } catch (error) {
+                        print('Error: $error');
 
-  //                       final Map<String, dynamic> responseData =
-  //                           json.decode(response.body);
-
-  //                       if (response.statusCode == 200 &&
-  //                           responseData['status'] == true) {
-  //                         showDialog(
-  //                           context: context,
-  //                           builder: (context) => AlertDialog(
-  //                             title: Text('Success'),
-  //                             content:
-  //                                 Text('Password has been reset successfully.'),
-  //                             actions: [
-  //                               TextButton(
-  //                                 onPressed: () {
-  //                                   Navigator.pop(context);
-  //                                   Navigator.pop(context);
-  //                                 },
-  //                                 child: Text('OK'),
-  //                               ),
-  //                             ],
-  //                           ),
-  //                         );
-  //                       } else {
-  //                         showDialog(
-  //                           context: context,
-  //                           builder: (context) => AlertDialog(
-  //                             title: Text('Error'),
-  //                             content: Text(responseData['message'] ??
-  //                                 'Failed to reset password.'),
-  //                             actions: [
-  //                               TextButton(
-  //                                 onPressed: () => Navigator.pop(context),
-  //                                 child: Text('OK'),
-  //                               ),
-  //                             ],
-  //                           ),
-  //                         );
-  //                       }
-  //                     } catch (error) {
-  //                       print('Error: $error');
-
-  //                       showDialog(
-  //                         context: context,
-  //                         builder: (context) => AlertDialog(
-  //                           title: Text('Error'),
-  //                           content: Text(
-  //                               'An error occurred during password reset.'),
-  //                           actions: [
-  //                             TextButton(
-  //                               onPressed: () => Navigator.pop(context),
-  //                               child: Text('OK'),
-  //                             ),
-  //                           ],
-  //                         ),
-  //                       );
-  //                     } finally {
-  //                       setState(() {
-  //                         _isLoading = false;
-  //                       });
-  //                     }
-  //                   },
-  //                 ),
-  //               ],
-  //               TextButton(
-  //                 child: Text('Cancel'),
-  //                 onPressed: () {
-  //                   Navigator.of(context).pop();
-  //                 },
-  //               ),
-  //             ],
-  //           );
-  //         },
-  //       );
-  //     },
-  //   );
-  // }
+                        showDialog(
+                          context: context,
+                          builder: (context) => AlertDialog(
+                            title: Text(
+                              'Error',
+                              style: TextStyle(
+                                color: Colors.red,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                            content: Text(
+                              'An error occurred during password reset.',
+                              style: TextStyle(color: Colors.black54),
+                            ),
+                            actions: [
+                              TextButton(
+                                onPressed: () => Navigator.pop(context),
+                                child: Text(
+                                  'OK',
+                                  style: TextStyle(
+                                    color: Colors.blue,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                        );
+                      } finally {
+                        setState(() {
+                          _isLoading = false;
+                        });
+                      }
+                    },
+                  ),
+                ],
+                TextButton(
+                  child: Text(
+                    'Cancel',
+                    style: TextStyle(
+                      color: Colors.red,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  onPressed: () {
+                    Navigator.pop(context);
+                  },
+                ),
+              ],
+            );
+          },
+        );
+      },
+    );
+  }
 
   @override
   @override
@@ -474,7 +588,7 @@ class _PageLoginState extends State<PageLogin> {
               // ),
               Image.asset(
                 'assets/logo1.png',
-                height: 120, 
+                height: 120,
               ),
               const SizedBox(height: 10),
               Text(
@@ -559,6 +673,23 @@ class _PageLoginState extends State<PageLogin> {
                   return null;
                 },
               ),
+
+              // forgot password
+              SizedBox(
+                height: 10,
+              ),
+              GestureDetector(
+                onTap: _forgotPassword,
+                child: Text(
+                  'Forgot Password?',
+                  style: TextStyle(
+                    fontSize: 12,
+                    color: Color(0xFF3a5baa),
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ),
+
               const SizedBox(height: 60),
               Column(
                 children: [

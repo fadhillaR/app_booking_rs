@@ -1,6 +1,11 @@
 import 'dart:async';
 
+import 'package:app_booking_rs/PageDonasi.dart';
+import 'package:app_booking_rs/PageGaleri.dart';
 import 'package:app_booking_rs/PageListRS.dart';
+import 'package:app_booking_rs/PageProgramDonasi.dart';
+import 'package:app_booking_rs/PageRoom.dart';
+import 'package:app_booking_rs/PageTestimoni.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -291,7 +296,10 @@ class _PageMulaiState extends State<PageMulai> with TickerProviderStateMixin {
                                 icon: Icons.shopping_cart,
                                 label: 'Booking\n Rumah Singgah',
                                 onTap: () {
-                                  // Navigasi ke halaman riwayat pemesanan
+                                  Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) => PageRoom()));
                                 },
                               ),
                               SizedBox(width: 20),
@@ -299,7 +307,10 @@ class _PageMulaiState extends State<PageMulai> with TickerProviderStateMixin {
                                 icon: Icons.credit_card,
                                 label: 'Donasi',
                                 onTap: () {
-                                  // Navigasi ke halaman donasi
+                                  Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) => PageDonasi()));
                                 },
                               ),
                             ],
@@ -314,7 +325,11 @@ class _PageMulaiState extends State<PageMulai> with TickerProviderStateMixin {
                                 icon: Icons.money,
                                 label: 'Program Donasi\nRumah Singgah',
                                 onTap: () {
-                                  // Navigasi ke halaman daftar rumah singgah
+                                  Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) =>
+                                              PageProgramDonasi()));
                                 },
                               ),
                               SizedBox(width: 20),
@@ -322,7 +337,11 @@ class _PageMulaiState extends State<PageMulai> with TickerProviderStateMixin {
                                 icon: Icons.photo_album,
                                 label: 'Gallery',
                                 onTap: () {
-                                  // Navigasi ke halaman riwayat pemesanan
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) => PageGaleri()),
+                                  );
                                 },
                               ),
                               SizedBox(width: 20),
@@ -330,7 +349,11 @@ class _PageMulaiState extends State<PageMulai> with TickerProviderStateMixin {
                                 icon: Icons.inventory_rounded,
                                 label: 'Testimoni',
                                 onTap: () {
-                                  // Navigasi ke halaman donasi
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) => PageTestimoni()),
+                                  );
                                 },
                               ),
                             ],

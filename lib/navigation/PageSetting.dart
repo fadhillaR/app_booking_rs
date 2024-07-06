@@ -2,6 +2,8 @@ import 'package:app_booking_rs/PageProfil.dart';
 import 'package:app_booking_rs/otherPage/PageAbout.dart';
 import 'package:app_booking_rs/otherPage/PageContact.dart';
 import 'package:app_booking_rs/otherPage/PageFAQ.dart';
+import 'package:app_booking_rs/otherPage/PageHelp.dart';
+import 'package:app_booking_rs/otherPage/PageLegal.dart';
 import 'package:app_booking_rs/otherPage/PageTerms.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -97,8 +99,18 @@ class PageSetting extends StatelessWidget {
                       );
                     },
                   ),
-                  const _CustomListTile(
-                      title: "Help", icon: CupertinoIcons.info_circle),
+                  _CustomListTile(
+                    title: "Help",
+                    icon: CupertinoIcons.info_circle,
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => PageHelp(),
+                        ),
+                      );
+                    },
+                  ),
                 ],
               ),
               _SingleSection(
@@ -120,12 +132,12 @@ class PageSetting extends StatelessWidget {
                     title: "Legal & Policy",
                     icon: CupertinoIcons.shield,
                     onTap: () {
-                      // Navigator.push(
-                      //   context,
-                      //   MaterialPageRoute(
-                      //     builder: (context) => PageLegal(),
-                      //   ),
-                      // );
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => PageLegal(),
+                        ),
+                      );
                     },
                   ),
                   // const _CustomListTile(
