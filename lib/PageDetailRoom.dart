@@ -113,7 +113,7 @@ class _PageDetailRoomState extends State<PageDetailRoom> {
                 ),
                 SizedBox(height: 5),
                 Text(
-                  'Harga          : Rp ${widget.room.price}',
+                  'Harga          : ${widget.room.price}',
                   style: TextStyle(
                     fontSize: 14,
                     color: Colors.black,
@@ -186,7 +186,7 @@ class _PageDetailRoomState extends State<PageDetailRoom> {
               Padding(
                 padding: const EdgeInsets.all(16.0),
                 child: Text(
-                  'Rp ${widget.room.price}/hari',
+                  '${widget.room.price}/hari',
                   style: TextStyle(
                     fontSize: 16,
                     fontWeight: FontWeight.bold,

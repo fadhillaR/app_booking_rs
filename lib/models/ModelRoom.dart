@@ -9,47 +9,48 @@ ModelRoom modelRoomFromJson(String str) => ModelRoom.fromJson(json.decode(str));
 String modelRoomToJson(ModelRoom data) => json.encode(data.toJson());
 
 class ModelRoom {
-    String message;
-    List<Result> result;
+  String message;
+  List<Result> result;
 
-    ModelRoom({
-        required this.message,
-        required this.result,
-    });
+  ModelRoom({
+    required this.message,
+    required this.result,
+  });
 
-    factory ModelRoom.fromJson(Map<String, dynamic> json) => ModelRoom(
+  factory ModelRoom.fromJson(Map<String, dynamic> json) => ModelRoom(
         message: json["message"],
-        result: List<Result>.from(json["result"].map((x) => Result.fromJson(x))),
-    );
+        result:
+            List<Result>.from(json["result"].map((x) => Result.fromJson(x))),
+      );
 
-    Map<String, dynamic> toJson() => {
+  Map<String, dynamic> toJson() => {
         "message": message,
         "result": List<dynamic>.from(result.map((x) => x.toJson())),
-    };
+      };
 }
 
 class Result {
-    int id;
-    int homestaysId;
-    String homestayName;
-    String type;
-    String description;
-    int quota;
-    String price;
-    List<Picture> picture;
+  int id;
+  int homestaysId;
+  String homestayName;
+  String type;
+  String description;
+  int quota;
+  String price;
+  List<Picture> picture;
 
-    Result({
-        required this.id,
-        required this.homestaysId,
-        required this.homestayName,
-        required this.type,
-        required this.description,
-        required this.quota,
-        required this.price,
-        required this.picture,
-    });
+  Result({
+    required this.id,
+    required this.homestaysId,
+    required this.homestayName,
+    required this.type,
+    required this.description,
+    required this.quota,
+    required this.price,
+    required this.picture,
+  });
 
-    factory Result.fromJson(Map<String, dynamic> json) => Result(
+  factory Result.fromJson(Map<String, dynamic> json) => Result(
         id: json["id"],
         homestaysId: json["homestays_id"],
         homestayName: json["homestay_name"],
@@ -57,10 +58,11 @@ class Result {
         description: json["description"],
         quota: json["quota"],
         price: json["price"],
-        picture: List<Picture>.from(json["picture"].map((x) => Picture.fromJson(x))),
-    );
+        picture:
+            List<Picture>.from(json["picture"].map((x) => Picture.fromJson(x))),
+      );
 
-    Map<String, dynamic> toJson() => {
+  Map<String, dynamic> toJson() => {
         "id": id,
         "homestays_id": homestaysId,
         "homestay_name": homestayName,
@@ -69,41 +71,50 @@ class Result {
         "quota": quota,
         "price": price,
         "picture": List<dynamic>.from(picture.map((x) => x.toJson())),
-    };
+      };
+
+  // Method to extract the numeric price from the formatted price string
+  double get numericPrice {
+    // Extract the numeric part of the price, remove 'Rp. ' and replace '.' with ''
+    String cleanedPrice = price.replaceAll('Rp. ', '').replaceAll('.', '');
+    return double.tryParse(cleanedPrice) ?? 0.0;
+  }
 }
 
 class Picture {
-    int id;
-    int roomId;
-    String filename;
-    DateTime createdAt;
-    // DateTime updatedAt;
-    DateTime? updatedAt;
+  int id;
+  int roomId;
+  String filename;
+  DateTime createdAt;
+  // DateTime updatedAt;
+  DateTime? updatedAt;
 
-    Picture({
-        required this.id,
-        required this.roomId,
-        required this.filename,
-        required this.createdAt,
-        // required this.updatedAt,
-        this.updatedAt,
-    });
+  Picture({
+    required this.id,
+    required this.roomId,
+    required this.filename,
+    required this.createdAt,
+    // required this.updatedAt,
+    this.updatedAt,
+  });
 
-    factory Picture.fromJson(Map<String, dynamic> json) => Picture(
+  factory Picture.fromJson(Map<String, dynamic> json) => Picture(
         id: json["id"],
         roomId: json["room_id"],
         filename: json["filename"],
         createdAt: DateTime.parse(json["created_at"]),
         // updatedAt: DateTime.parse(json["updated_at"]),
-        updatedAt: json["updated_at"] != null ? DateTime.parse(json["updated_at"]) : null,
-    );
+        updatedAt: json["updated_at"] != null
+            ? DateTime.parse(json["updated_at"])
+            : null,
+      );
 
-    Map<String, dynamic> toJson() => {
+  Map<String, dynamic> toJson() => {
         "id": id,
         "room_id": roomId,
         "filename": filename,
         "created_at": createdAt.toIso8601String(),
         // "updated_at": updatedAt.toIso8601String(),
         "updated_at": updatedAt?.toIso8601String(),
-    };
+      };
 }

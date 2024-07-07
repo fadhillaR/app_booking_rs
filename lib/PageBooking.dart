@@ -1,6 +1,7 @@
 import 'package:app_booking_rs/PageKonfirmasi.dart';
 import 'package:app_booking_rs/models/ModelRoom.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
@@ -123,24 +124,42 @@ class _PageBookingState extends State<PageBooking> {
     return words.sublist(0, wordLimit).join(' ') + '...';
   }
 
+  // double calculateTotalPrice() {
+  //   if (bookedRoom == null) {
+  //     return 0.0;
+  //   }
+
+  //   double price;
+  //   if (bookedRoom!.price is int) {
+  //     price = (bookedRoom!.price as int).toDouble();
+  //   } else if (bookedRoom!.price is String) {
+  //     price = double.tryParse(bookedRoom!.price as String) ?? 0.0;
+  //   } else if (bookedRoom!.price is double) {
+  //     price = bookedRoom!.price as double;
+  //   } else {
+  //     // Default to 0.0 if price type is unexpected
+  //     price = 0.0;
+  //   }
+
+  //   return price * days;
+  // }
+
   double calculateTotalPrice() {
     if (bookedRoom == null) {
       return 0.0;
     }
 
-    double price;
-    if (bookedRoom!.price is int) {
-      price = (bookedRoom!.price as int).toDouble();
-    } else if (bookedRoom!.price is String) {
-      price = double.tryParse(bookedRoom!.price as String) ?? 0.0;
-    } else if (bookedRoom!.price is double) {
-      price = bookedRoom!.price as double;
-    } else {
-      // Default to 0.0 if price type is unexpected
-      price = 0.0;
-    }
-
+    double price = bookedRoom!.numericPrice;
     return price * days;
+  }
+
+  String formatCurrency(double amount) {
+    final format = NumberFormat.currency(
+      locale: 'id_ID', // Menggunakan format mata uang Indonesia
+      symbol: 'Rp ', // Simbol mata uang Indonesia
+      decimalDigits: 0, // Tidak menampilkan desimal
+    );
+    return format.format(amount);
   }
 
   @override
@@ -281,7 +300,7 @@ class _PageBookingState extends State<PageBooking> {
                     ),
                   ),
                   trailing: Text(
-                    'Rp. ${bookedRoom!.price}',
+                    '${bookedRoom!.price}',
                     style: TextStyle(
                       color: Colors.red,
                       fontSize: 14,
@@ -371,9 +390,25 @@ class _PageBookingState extends State<PageBooking> {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
+              // Text(
+              //   // 'Total : Rp. ${bookedRoom!.price}',
+              //   'Total : Rp. ${calculateTotalPrice().toStringAsFixed(2)}',
+              //   style: TextStyle(
+              //     color: Colors.red,
+              //     fontSize: 16.0,
+              //     fontWeight: FontWeight.bold,
+              //   ),
+              // ),
+              // Text(
+              //   'Total : Rp. ${calculateTotalPrice().toStringAsFixed(2).replaceAll('.', ',')}',
+              //   style: TextStyle(
+              //     color: Colors.red,
+              //     fontSize: 16.0,
+              //     fontWeight: FontWeight.bold,
+              //   ),
+              // ),
               Text(
-                // 'Total : Rp. ${bookedRoom!.price}',
-                'Total : Rp. ${calculateTotalPrice().toStringAsFixed(2)}',
+                'Total : ${formatCurrency(calculateTotalPrice())}',
                 style: TextStyle(
                   color: Colors.red,
                   fontSize: 16.0,

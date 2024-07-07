@@ -175,7 +175,7 @@ class _PageDetailHistoryState extends State<PageDetailHistory> {
                                       ),
                                     ),
                                     Text(
-                                      'Rp. ${widget.booking.totalPrice}',
+                                      '${widget.booking.totalPrice}',
                                       style: TextStyle(
                                         color: Colors.red,
                                         fontWeight: FontWeight.bold,
@@ -290,7 +290,7 @@ class _PageDetailHistoryState extends State<PageDetailHistory> {
                             ),
                             SizedBox(width: 10),
                             Text(
-                              'Rp. ${widget.booking.totalPrice}',
+                              '${widget.booking.totalPrice}',
                               style: TextStyle(
                                 fontSize: 14,
                               ),
