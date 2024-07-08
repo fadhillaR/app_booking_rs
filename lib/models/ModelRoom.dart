@@ -76,7 +76,7 @@ class Result {
   // Method to extract the numeric price from the formatted price string
   double get numericPrice {
     // Extract the numeric part of the price, remove 'Rp. ' and replace '.' with ''
-    String cleanedPrice = price.replaceAll('Rp. ', '').replaceAll('.', '');
+    String cleanedPrice = price.replaceAll('Rp ', '').replaceAll('.', '');
     return double.tryParse(cleanedPrice) ?? 0.0;
   }
 }
